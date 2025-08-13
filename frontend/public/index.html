@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ExpenseTracker Pro</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <h2>💰 ExpenseTracker Pro</h2>
+            </div>
+            <div class="user-profile">
+                <span class="user-name">Hello, John</span>
+                <div class="user-avatar">👤</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Dashboard View -->
+        <section id="dashboard" class="view active">
+            <div class="dashboard-header">
+                <h1>Dashboard</h1>
+                <span class="date-info">August 2025</span>
+            </div>
+
+            <!-- Account Cards -->
+            <div class="account-cards">
+                <div class="account-card primary" data-account="acc1">
+                    <div class="account-info">
+                        <span class="account-name">Primary Checking</span>
+                        <span class="account-type">Checking</span>
+                    </div>
+                    <div class="account-balance">$4,250.75</div>
+                </div>
+                <div class="account-card savings" data-account="acc2">
+                    <div class="account-info">
+                        <span class="account-name">Savings Account</span>
+                        <span class="account-type">Savings</span>
+                    </div>
+                    <div class="account-balance">$12,850.25</div>
+                </div>
+                <div class="account-card credit" data-account="acc3">
+                    <div class="account-info">
+                        <span class="account-name">Credit Card</span>
+                        <span class="account-type">Credit</span>
+                    </div>
+                    <div class="account-balance">-$1,250.50</div>
+                </div>
+            </div>
+
+            <!-- Monthly Summary -->
+            <div class="card">
+                <h3>Monthly Summary</h3>
+                <div class="summary-stats">
+                    <div class="stat-item">
+                        <span class="stat-label">Total Income</span>
+                        <span class="stat-value income">+$3,200.00</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Total Expenses</span>
+                        <span class="stat-value expense">-$1,856.16</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Net Balance</span>
+                        <span class="stat-value positive">+$1,343.84</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Budget Progress -->
+            <div class="card">
+                <h3>Budget Overview</h3>
+                <div class="budget-items">
+                    <div class="budget-item">
+                        <div class="budget-header">
+                            <span>🍕 Food & Dining</span>
+                            <span>$285.67 / $500</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 57%"></div>
+                        </div>
+                    </div>
+                    <div class="budget-item">
+                        <div class="budget-header">
+                            <span>🚗 Transportation</span>
+                            <span>$125.00 / $200</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 62%"></div>
+                        </div>
+                    </div>
+                    <div class="budget-item">
+                        <div class="budget-header">
+                            <span>🛍️ Shopping</span>
+                            <span>$320.50 / $400</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 80%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Transactions -->
+            <div class="card">
+                <h3>Recent Transactions</h3>
+                <div class="transaction-list" id="recentTransactions">
+                    <!-- Transactions will be populated by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Accounts View -->
+        <section id="accounts" class="view">
+            <div class="section-header">
+                <h1>Accounts</h1>
+            </div>
+            <div class="accounts-grid">
+                <div class="account-detail-card" data-account="acc1">
+                    <div class="account-detail-header">
+                        <div class="account-icon primary">🏦</div>
+                        <div class="account-detail-info">
+                            <h3>Primary Checking</h3>
+                            <span class="account-number">****1234</span>
+                        </div>
+                        <div class="account-balance-large">$4,250.75</div>
+                    </div>
+                    <div class="account-actions">
+                        <button class="btn btn--sm btn--outline" onclick="viewAccountTransactions('acc1')">View Transactions</button>
+                    </div>
+                </div>
+
+                <div class="account-detail-card" data-account="acc2">
+                    <div class="account-detail-header">
+                        <div class="account-icon savings">💰</div>
+                        <div class="account-detail-info">
+                            <h3>Savings Account</h3>
+                            <span class="account-number">****5678</span>
+                        </div>
+                        <div class="account-balance-large">$12,850.25</div>
+                    </div>
+                    <div class="account-actions">
+                        <button class="btn btn--sm btn--outline" onclick="viewAccountTransactions('acc2')">View Transactions</button>
+                    </div>
+                </div>
+
+                <div class="account-detail-card" data-account="acc3">
+                    <div class="account-detail-header">
+                        <div class="account-icon credit">💳</div>
+                        <div class="account-detail-info">
+                            <h3>Credit Card</h3>
+                            <span class="account-number">****9012</span>
+                        </div>
+                        <div class="account-balance-large">-$1,250.50</div>
+                    </div>
+                    <div class="account-actions">
+                        <button class="btn btn--sm btn--outline" onclick="viewAccountTransactions('acc3')">View Transactions</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Add Expense View -->
+        <section id="add-expense" class="view">
+            <div class="section-header">
+                <h1>Add Expense</h1>
+            </div>
+            <div class="form-container">
+                <form id="expenseForm" class="expense-form">
+                    <div class="form-group">
+                        <label class="form-label" for="amount">Amount</label>
+                        <input type="number" id="amount" class="form-control" step="0.01" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="account">Account</label>
+                        <select id="account" class="form-control" required>
+                            <option value="">Select Account</option>
+                            <option value="acc1">Primary Checking</option>
+                            <option value="acc2">Savings Account</option>
+                            <option value="acc3">Credit Card</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="category">Category</label>
+                        <select id="category" class="form-control" required>
+                            <option value="">Select Category</option>
+                            <option value="food">🍕 Food & Dining</option>
+                            <option value="transport">🚗 Transportation</option>
+                            <option value="shopping">🛍️ Shopping</option>
+                            <option value="entertainment">🎬 Entertainment</option>
+                            <option value="utilities">⚡ Utilities</option>
+                            <option value="health">🏥 Healthcare</option>
+                            <option value="education">📚 Education</option>
+                            <option value="other">📋 Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="description">Description</label>
+                        <input type="text" id="description" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="date">Date</label>
+                        <input type="date" id="date" class="form-control" required>
+                    </div>
+
+                    <button type="submit" class="btn btn--primary btn--full-width">Add Expense</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Analytics View -->
+        <section id="analytics" class="view">
+            <div class="section-header">
+                <h1>Analytics</h1>
+            </div>
+
+            <!-- Expense Trends Chart -->
+            <div class="card">
+                <h3>Monthly Trends</h3>
+                <div class="chart-container" style="position: relative; height: 300px;">
+                    <canvas id="trendsChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Category Breakdown Chart -->
+            <div class="card">
+                <h3>Expense Categories</h3>
+                <div class="chart-container" style="position: relative; height: 300px;">
+                    <canvas id="categoryChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Spending Pattern -->
+            <div class="card">
+                <h3>Weekly Spending Pattern</h3>
+                <div class="chart-container" style="position: relative; height: 300px;">
+                    <canvas id="weeklyChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- AI Assistant View -->
+        <section id="ai-assistant" class="view">
+            <div class="section-header">
+                <h1>AI Financial Assistant</h1>
+            </div>
+
+            <!-- AI Suggestions -->
+            <div class="ai-suggestions">
+                <div class="suggestion-card high-priority">
+                    <div class="suggestion-header">
+                        <span class="suggestion-icon">💡</span>
+                        <span class="suggestion-title">Reduce Dining Out Expenses</span>
+                        <span class="status status--error">High Priority</span>
+                    </div>
+                    <p class="suggestion-description">You've spent $285.67 on dining out this month, which is 57% of your food budget. Try meal prepping 2-3 times per week to save approximately $100-150 monthly.</p>
+                    <div class="suggestion-savings">
+                        <span>Potential Savings: <strong>$120/month</strong></span>
+                    </div>
+                </div>
+
+                <div class="suggestion-card medium-priority">
+                    <div class="suggestion-header">
+                        <span class="suggestion-icon">🚗</span>
+                        <span class="suggestion-title">Transportation Cost Reduction</span>
+                        <span class="status status--warning">Medium Priority</span>
+                    </div>
+                    <p class="suggestion-description">Consider using public transport or carpooling for regular commutes. Based on your transport spending pattern, you could save up to $50 monthly.</p>
+                    <div class="suggestion-savings">
+                        <span>Potential Savings: <strong>$50/month</strong></span>
+                    </div>
+                </div>
+
+                <div class="suggestion-card low-priority">
+                    <div class="suggestion-header">
+                        <span class="suggestion-icon">⚙️</span>
+                        <span class="suggestion-title">Review Recurring Subscriptions</span>
+                        <span class="status status--info">Medium Priority</span>
+                    </div>
+                    <p class="suggestion-description">Analyze your utility and subscription expenses. Cancel unused services to save approximately $30-40 monthly.</p>
+                    <div class="suggestion-savings">
+                        <span>Potential Savings: <strong>$35/month</strong></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI Chat Interface -->
+            <div class="card ai-chat">
+                <h3>Ask AI Assistant</h3>
+                <div class="chat-container" id="chatContainer">
+                    <div class="chat-message ai-message">
+                        <div class="message-content">
+                            Hello! I'm your AI financial assistant. I can help you analyze your spending patterns and suggest ways to optimize your expenses. What would you like to know?
+                        </div>
+                    </div>
+                </div>
+                <div class="chat-input-container">
+                    <input type="text" id="chatInput" class="form-control" placeholder="Ask about your finances...">
+                    <button id="sendChat" class="btn btn--primary">Send</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Floating Action Button -->
+    <button class="fab" onclick="showView('add-expense')">
+        <span>+</span>
+    </button>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <button class="nav-item active" onclick="showView('dashboard')">
+            <span class="nav-icon">🏠</span>
+            <span class="nav-label">Dashboard</span>
+        </button>
+        <button class="nav-item" onclick="showView('accounts')">
+            <span class="nav-icon">🏦</span>
+            <span class="nav-label">Accounts</span>
+        </button>
+        <button class="nav-item" onclick="showView('add-expense')">
+            <span class="nav-icon">➕</span>
+            <span class="nav-label">Add Expense</span>
+        </button>
+        <button class="nav-item" onclick="showView('analytics')">
+            <span class="nav-icon">📊</span>
+            <span class="nav-label">Analytics</span>
+        </button>
+        <button class="nav-item" onclick="showView('ai-assistant')">
+            <span class="nav-icon">🤖</span>
+            <span class="nav-label">AI Assistant</span>
+        </button>
+    </nav>
+
+    <script src="app.js"></script>
+</body>
+</html>
